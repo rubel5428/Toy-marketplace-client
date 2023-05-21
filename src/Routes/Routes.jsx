@@ -1,0 +1,96 @@
+import { createBrowserRouter } from 'react-router-dom'
+import Main from '../LayOut/Main'
+import Home from '../peges/Home/Home/Home'
+import Login from '../peges/Login/Login'
+import SignUp from '../peges/Signup/SignUp'
+import NotFound from '../peges/NotFound/NotFound'
+import PrivetRoutes from './PrivetRoutes'
+import GestRoutes from './GestRoutes'
+import AddProducts from '../peges/AddProducts/AddProducts'
+import Single from '../peges/SingleProduct/single'
+import AllToyes from '../peges/AllToys/AllToyes'
+import MyToys from '../peges/MyToys/MyToys'
+import UpdateToy from '../peges/UpdateToy/UpdateToy'
+import Blogs from '../peges/Blogs/Blogs'
+
+const router = createBrowserRouter([
+   {
+      path: '/',
+      element: <Main></Main>,
+      children: [
+         {
+            path: '/',
+            element: <Home></Home>,
+            loader: () => fetch('http://localhost:5000/products?limit=6'),
+         },
+         {
+            path: '/products',
+            element: <AllToyes />,
+            loader: () => fetch('http://localhost:5000/products?limit=20'),
+         },
+         {
+            path: '/my-toys',
+            element: (
+               <PrivetRoutes>
+                  <MyToys />
+               </PrivetRoutes>
+            ),
+         },
+         {
+            path: '/products/:id',
+            element: (
+               <PrivetRoutes>
+                  <Single />
+               </PrivetRoutes>
+            ),
+            loader: ({ params }) =>
+               fetch(`http://localhost:5000/products/${params.id}`),
+         },
+         {
+            path: '/update-toy/:id',
+            element: (
+               <PrivetRoutes>
+                  <UpdateToy />
+               </PrivetRoutes>
+            ),
+            loader: ({ params }) =>
+               fetch(`http://localhost:5000/products/${params.id}`),
+         },
+         {
+            path: 'addatoy',
+            element: (
+               <PrivetRoutes>
+                  <AddProducts></AddProducts>
+               </PrivetRoutes>
+            ),
+            loader: () => fetch('http://localhost:5000/categories'),
+         },
+         {
+            path: '/login',
+            element: (
+               <GestRoutes>
+                  <Login></Login>
+               </GestRoutes>
+            ),
+         },
+         {
+            path: '/signup',
+            element: (
+               <GestRoutes>
+                  <SignUp></SignUp>
+               </GestRoutes>
+            ),
+         },
+         {
+            path: '/blog',
+            element: <Blogs></Blogs>,
+         },
+      ],
+   },
+   {
+      path: '*',
+      element: <NotFound></NotFound>,
+   },
+])
+
+export default router
