@@ -12,7 +12,9 @@ const ShopByCategory = () => {
    useEffect(() => {
       const fetchData = async () => {
          try {
-            const response = await fetch(`http://localhost:5000/categories`)
+            const response = await fetch(
+               `https://assignment-11-server-three-green.vercel.app/categories`
+            )
             const data = await response.json()
             setCategories(data)
             if (data?.length > 0) {
@@ -31,7 +33,9 @@ const ShopByCategory = () => {
    const fatchToy = async (id) => {
       setProductLoading(true)
       try {
-         const response = await fetch(`http://localhost:5000/product-cat/${id}`)
+         const response = await fetch(
+            `https://assignment-11-server-three-green.vercel.app/product-cat/${id}`
+         )
          const data = await response.json()
          setProduct(data)
       } catch (error) {

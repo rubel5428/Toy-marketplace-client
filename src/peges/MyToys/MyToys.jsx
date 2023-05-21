@@ -10,7 +10,7 @@ export default function MyToys() {
    const fetchToys = async (order = null) => {
       try {
          const response = await fetch(
-            `http://localhost:5000/my-toys?email=${user?.email}&sort=${order}`
+            `https://assignment-11-server-three-green.vercel.app/my-toys?email=${user?.email}&sort=${order}`
          )
          const data = await response.json()
          setProducts(data)
@@ -29,9 +29,12 @@ export default function MyToys() {
 
    const handleDelete = (id) => {
       if (confirm('are you to delete this product?')) {
-         fetch(`http://localhost:5000/product/${id}`, {
-            method: 'DELETE',
-         })
+         fetch(
+            `https://assignment-11-server-three-green.vercel.app/product/${id}`,
+            {
+               method: 'DELETE',
+            }
+         )
             .then((res) => res.json())
             .then((data) => {
                if (data.deletedCount > 0) {

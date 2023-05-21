@@ -13,7 +13,7 @@ export default function AllToyes() {
       const search = form.search.value
       try {
          const response = await fetch(
-            `http://localhost:5000/products?limit=20&search=${search}`
+            `https://assignment-11-server-three-green.vercel.app/products?limit=20&search=${search}`
          )
          const data = await response.json()
 

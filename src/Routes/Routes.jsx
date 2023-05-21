@@ -21,12 +21,18 @@ const router = createBrowserRouter([
          {
             path: '/',
             element: <Home></Home>,
-            loader: () => fetch('http://localhost:5000/products?limit=6'),
+            loader: () =>
+               fetch(
+                  'https://assignment-11-server-three-green.vercel.app/products?limit=6'
+               ),
          },
          {
             path: '/products',
             element: <AllToyes />,
-            loader: () => fetch('http://localhost:5000/products?limit=20'),
+            loader: () =>
+               fetch(
+                  'https://assignment-11-server-three-green.vercel.app/products?limit=20'
+               ),
          },
          {
             path: '/my-toys',
@@ -44,7 +50,9 @@ const router = createBrowserRouter([
                </PrivetRoutes>
             ),
             loader: ({ params }) =>
-               fetch(`http://localhost:5000/products/${params.id}`),
+               fetch(
+                  `https://assignment-11-server-three-green.vercel.app/products/${params.id}`
+               ),
          },
          {
             path: '/update-toy/:id',
@@ -54,7 +62,9 @@ const router = createBrowserRouter([
                </PrivetRoutes>
             ),
             loader: ({ params }) =>
-               fetch(`http://localhost:5000/products/${params.id}`),
+               fetch(
+                  `https://assignment-11-server-three-green.vercel.app/products/${params.id}`
+               ),
          },
          {
             path: 'addatoy',
@@ -63,7 +73,10 @@ const router = createBrowserRouter([
                   <AddProducts></AddProducts>
                </PrivetRoutes>
             ),
-            loader: () => fetch('http://localhost:5000/categories'),
+            loader: () =>
+               fetch(
+                  'https://assignment-11-server-three-green.vercel.app/categories'
+               ),
          },
          {
             path: '/login',
